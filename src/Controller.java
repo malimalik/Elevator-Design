@@ -9,7 +9,9 @@ public class Controller {
 
     private PriorityQueue<Request> passengerUpQueue;
     private PriorityQueue<Request> passengerDownQueue;
-    private LinkedList<Request> serviceQueue;
+    private LinkedList<Request> serviceUpQueue;
+    private LinkedList<Request> serviceDownQueue;
+
 
     private static final int CAPACITY = 24;
 
@@ -35,7 +37,14 @@ public class Controller {
 
     }
 
+    /** Empties all the queues of all the requests and takes the elevator
+     * to first floor. */
     public void handleEmergency() {
+        passengerUpQueue.clear();
+        passengerDownQueue.clear();
+        serviceUpQueue.clear();
+        serviceDownQueue.clear();
+
 
     }
 
