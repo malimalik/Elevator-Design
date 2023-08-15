@@ -4,32 +4,31 @@ import java.util.LinkedList;
 public class Controller {
 
     // Attributes
-    private PassengerElevator passengerElevator;
-    private ServiceElevator serviceElevator;
+    private Elevator passengerElevator;
+    private Elevator serviceElevator;
 
-    private PriorityQueue<Request> passengerUpQueue;
-    private PriorityQueue<Request> passengerDownQueue;
-    private LinkedList<Request> serviceUpQueue;
-    private LinkedList<Request> serviceDownQueue;
+    private static final int CAPACITY_LIMIT = 24;
+    private static final int WEIGHT_LIMIT = 2000;
 
-
-    private static final int CAPACITY = 24;
 
     // Constructor
-    public Controller() {
-
+    public Controller(PassengerElevator passengerElevator, ServiceElevator serviceElevator) {
+     this.passengerElevator = new PassengerElevator(1, false);
+     this.serviceElevator = new ServiceElevator(1, false);
     }
 
     // Methods
-    public void sendPassengerRequest(Request request) throws ElevatorCapacityException {
+    public void sendPassengerRequest(Request request) {
 
     }
 
-    public void sendServiceRequest(Request request) throws ElevatorCapacityException {
+    public void sendServiceRequest(Request request) {
 
     }
 
     public void handlePassengerRequests() {
+
+
 
     }
 
@@ -40,17 +39,9 @@ public class Controller {
     /** Empties all the queues of all the requests and takes the elevator
      * to first floor. */
     public void handleEmergency() {
-        passengerUpQueue.clear();
-        passengerDownQueue.clear();
-        serviceUpQueue.clear();
-        serviceDownQueue.clear();
-
-
     }
 
-
     public static void main(String[] args) {
-        Elevator el = new ServiceElevator(1, false);
-        el.warnElevatorOverload();
+
     }
 }

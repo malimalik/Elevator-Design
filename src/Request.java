@@ -1,25 +1,40 @@
+import java.time.Instant;
+
 public class Request {
+
+    // where the request originated from: OUTSIDE, INSIDE
     private RequestLocation location;
+    // is the elevator going up or down?
     private State direction;
+    // what floor is the elevator on
     private int currentFloor;
+    // what floor is the elevator going to
     private int destinationFloor;
-    private ElevatorType elevatorType;
+    // is it a call to the service elevator or the passenger elevator
+    protected ElevatorType elevatorType;
 
+    protected Instant time;
 
-    public Request(RequestLocation location, State direction, int currentFloor, int destinationFloor, ElevatorType elevatorType) {
-        this.location = location;
-        this.direction = direction;
-        this.elevatorType = elevatorType;
+    private final int CAPACITY = 1;
+
+    public Request(RequestLocation location,
+                   State direction,
+                   int currentFloor,
+                   int destinationFloor
+                   ) {
         if (currentFloor > destinationFloor) {
             this.direction = State.GOING_DOWN;
         } else if (currentFloor < destinationFloor) {
             this.direction = State.GOING_UP;
         } else {
-            throw new IllegalArgumentException("Destination floor must be different from the current floor");
+            throw new IllegalArgumentException("Destination floor can't be the same as the current floor.");
         }
-
+        this.location = location;
+        this.direction = direction;
         this.currentFloor = currentFloor;
         this.destinationFloor = destinationFloor;
+        this.elevatorType = ElevatorType.PASSENGER;
+        this.time = Instant.now();
 
     }
 
@@ -35,5 +50,23 @@ public class Request {
         return this.elevatorType;
     }
 
+    public RequestLocation getLocation() {
+        return this.location;
+    }
 
+    public State getDirection() {
+        return this.direction;
+    }
+
+    public ElevatorType getElevatorType() {
+        return this.elevatorType;
+    }
+
+    public int getCAPACITY() {
+        return this.CAPACITY;
+    }
+
+    public Instant getTime() {
+        return this.time;
+    }
 }

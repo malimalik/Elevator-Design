@@ -11,22 +11,20 @@ public abstract class Elevator {
         this.emergencyStatus = emergencyStatus;
     }
 
-    protected abstract void moveToFloor(int floorNumber);
-
-
-    public abstract void addRequestToQueue(Request request);
-
-    // Empty the queue for both going up and down and go to the recall floor, which is mist likely the ground floor.
+    protected abstract void moveToFloor();
     public abstract void processEmergency();
-
     public int getCurrentFloor() {
         return this.currentFloor;
     }
-
     public State getState() {
         return state;
     }
+    public void setState(State state) {
+        this.state = state;
+    }
+    public void setCurrentFloor(int floor) {
+        this.currentFloor = floor;
+    }
 
-    protected abstract void warnElevatorOverload();
 
 }
