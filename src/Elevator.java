@@ -1,5 +1,3 @@
-import java.util.List; // Or Priority Queue based on your preference
-
 public abstract class Elevator {
     protected int currentFloor;
     protected State state;
@@ -19,12 +17,13 @@ public abstract class Elevator {
     public State getState() {
         return state;
     }
-    public void setState(State state) {
+    protected void setState(State state) {
         this.state = state;
     }
-    public void setCurrentFloor(int floor) {
+    protected void setCurrentFloor(int floor) {
         this.currentFloor = floor;
     }
-
-
+    protected void setEmergencyStatus() {
+        this.emergencyStatus = true;
+    }
 }

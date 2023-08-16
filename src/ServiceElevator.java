@@ -2,8 +2,6 @@
  * 2023 Copyright NeetCode.io, All rights reserved.
  */
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Timer;
 
 public class ServiceElevator extends Elevator {
     private LinkedList<ServiceRequest> serviceQueue;
@@ -25,7 +23,7 @@ public class ServiceElevator extends Elevator {
         while (!serviceQueue.isEmpty()) {
             ServiceRequest currRequest = serviceQueue.remove();
             try {
-                if (isElevatorOverloaded()) {
+                if (currRequest.getWeight() > WEIGHT_LIMIT) {
                     throw new ElevatorOverloadedException("Elevator overloaded with weight: " + currRequest.getWeight());
                 }
 
@@ -46,7 +44,7 @@ public class ServiceElevator extends Elevator {
 
     /** This method will be the one to add the request to the relevant queue*/
     public void addRequestToQueue(ServiceRequest request) {
-            serviceQueue.add(request);
+        serviceQueue.add(request);
     }
 
 
@@ -57,11 +55,7 @@ public class ServiceElevator extends Elevator {
         serviceQueue.clear();
         this.setCurrentFloor(1);
         this.setState(State.IDLE);
-    }
-
-
-    public boolean isElevatorOverloaded(ServiceRequest request) {
-        return request.getWeight() > WEIGHT_LIMIT;
+        this.setEmergencyStatus();
     }
 
 }
