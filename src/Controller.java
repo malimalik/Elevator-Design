@@ -1,42 +1,39 @@
-import java.util.PriorityQueue;
-import java.util.LinkedList;
+
 
 public class Controller {
-
-    // Attributes
     private ElevatorFactory factory;
     private PassengerElevator passengerElevator;
     private ServiceElevator serviceElevator;
-    // Constructor
     public Controller(ElevatorFactory factory) {
         this.factory = factory;
-        this.passengerElevator = factory.createElevator(ElevatorType.PASSENGER);
-        this.serviceElevator = factory.createElevator(ElevatorType.SERVICE);
+        this.passengerElevator = (PassengerElevator) factory.createElevator(ElevatorType.PASSENGER);
+        this.serviceElevator = (ServiceElevator) factory.createElevator(ElevatorType.SERVICE);
     }
 
     // Methods
-    public void sendPassengerRequest(Request request) {
-        this.passengerElevator.add
+    public void sendPassengerUpRequests(Request request) {
+        this.passengerElevator.addUpRequest(request);
     }
 
-    public void sendServiceRequest(Request request) {
-            this.serviceElevator.addRequestToQueue(request);
+    public void sendPassengerDownRequests(Request request) {
+        this.passengerElevator.addDownRequest(request);
+    }
+
+    public void sendServiceRequest(ServiceRequest request) {
+        this.serviceElevator.addRequestToQueue(request);
     }
 
     public void handlePassengerRequests() {
-        this.passengerElevator.moveToFloor();
-
+        this.passengerElevator.operate();
 
     }
 
     public void handleServiceRequests() {
-        this.serviceElevator.moveToFloor();
+        this.serviceElevator.operate();
     }
 
     public void handleEmergency() {
         passengerElevator.processEmergency();
         serviceElevator.processEmergency();
     }
-
-
 }

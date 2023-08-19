@@ -1,7 +1,7 @@
 /**
  * Used to denote the current location of the Elevator.
  */
-public enum RequestLocation {
+public enum RequestOrigin {
     OUTSIDE,
     INSIDE,
 }
