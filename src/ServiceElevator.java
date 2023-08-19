@@ -17,11 +17,6 @@ public class ServiceElevator extends Elevator {
 
         while (!serviceQueue.isEmpty()) {
             ServiceRequest currRequest = serviceQueue.remove();
-            try {
-                if (currRequest.getWeight() > WEIGHT_LIMIT) {
-                    throw new ElevatorOverloadedException("Elevator overloaded with weight: " + currRequest.getWeight());
-                }
-                // move the elevator to the destination floor
 
                 System.out.println(); // Move to the next line after the dots.
                 System.out.println("Currently at " + this.getCurrentFloor());
@@ -42,11 +37,6 @@ public class ServiceElevator extends Elevator {
                 openDoors();
                 waitForSeconds(3); // Simulating 3 seconds for loading/unloading.
                 closeDoors();
-
-            } catch (ElevatorOverloadedException e) {
-                System.err.println(e.getMessage()); // Prints the error message.
-                continue;
-            }
         }
         this.setState(State.IDLE);
         System.out.println("All requests have been fulfilled, elevator is now " + this.getState());
