@@ -1,6 +1,5 @@
 ﻿# Elevator-Design
 
-Hello, welcome to the most beautiful and functional elevator system in the world.
 
 ## Context
 
